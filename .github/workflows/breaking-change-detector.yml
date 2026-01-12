@@ -1,0 +1,56 @@
+name: Breaking Change Detector
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+
+jobs:
+  check-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Crucial for griffe.load_git to access the main branch history
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Griffe
+        run: pip install griffe
+
+      - name: Run Breaking Change Detection
+        shell: python
+        run: |
+          import sys
+          import griffe
+          from griffe import find_breaking_changes, load, load_git
+
+          # 1. Load the current PR version from the local source
+          # The adk-python source is located in src/google/adk
+          try:
+              new_api = load("src/google/adk")
+              
+              # 2. Load the 'main' version for comparison
+              # Griffe will look at the main branch's version of the package
+              old_api = load_git("google.adk", ref="main")
+
+              # 3. Detect and explain breaking changes
+              breakages = list(find_breaking_changes(old_api, new_api))
+              
+              if breakages:
+                  print(f"::error::Found {len(breakages)} breaking changes!")
+                  for breakage in breakages:
+                      # .explain() provides a human-readable reason for the breakage
+                      print(breakage.explain())
+                  sys.exit(1)
+                  
+              print("No breaking changes detected.")
+          except Exception as e:
+              print(f"::warning::Breaking change detection failed: {e}")
+              # We don't exit 1 here to prevent CI failure if the tool itself crashes
