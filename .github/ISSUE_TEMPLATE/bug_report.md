@@ -7,34 +7,49 @@ assignees: ''
 
 ---
 
-** Please make sure you read the contribution guide and file the issues in the right place. **
-[Contribution guide.](https://google.github.io/adk-docs/contributing-guide/)
+## 🔴 Required Information
+*Please ensure all items in this section are completed to allow for efficient triaging. Requests without complete information may be rejected / deprioritized. If an item is not applicable to you - please mark it as N/A*
 
-**Describe the bug**
+**Describe the Bug**
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Please share a minimal code and data to reproduce your problem.
-Steps to reproduce the behavior:
-1. Install '...'
-2. Run '....'
-3. Open '....'
-4. Provide error or stacktrace
+**Steps to Reproduce**
+Please provide a numbered list of steps to reproduce the behavior:
+1. Initialize ADK with...
+2. Connect accessory...
+3. Call function `x`...
+4. See error...
 
-**Expected behavior**
+**Expected Behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Observed Behavior**
+What actually happened? Include error messages or crash stack traces here.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. macOS, Linux, Windows]
- - Python version(python -V):
- - ADK version(pip show google-adk):
+**Environment Details**
+* **ADK Library Version:** (e.g., 2.0.1)
+* **Desktop OS:** (e.g., macOS, Linux, Windows]
+* **Python Version:**
 
- **Model Information:**
- - Are you using LiteLLM: Yes/No
- - Which model is being used(e.g. gemini-2.5-pro)
+**Model Information**
+* **Are you using LiteLLM:** Yes/No
+* **Which model is being used:** (e.g., gemini-2.5-pro)
 
-**Additional context**
+---
+
+## 🟡 Optional Information
+*Providing this information greatly speeds up the resolution process.*
+
+**Regression**
+Did this work in a previous version of ADK? If so, which one?
+
+**Logs (Logcat)**
+Please attach relevant logs. Wrap them in code blocks (```) or attach a text file.
+```text
+// Paste logs here
+```
+**Screenshots / Video**
+If applicable, add screenshots or screen recordings to help explain your problem.
+
+**Additional Context**
 Add any other context about the problem here.
